@@ -1,0 +1,91 @@
+@import url('../../App.css');
+
+.RegisterBackground{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.RegisterBox{
+    width: 20vw;
+    min-width: 400px;
+    height: 57vh;
+    min-height: 450px;
+
+    padding-top: 3vh;
+    margin-top: 20vh;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary-color);
+}
+
+.RegisterPageTitle{
+  font-size: 380%;
+  padding-bottom: 3.5vh;
+}
+
+.RegisterBoxContent{
+    width: 100%;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.RegisterPageInputTitle{
+  align-items: left;
+  margin-bottom: 0.5vh;
+}
+
+.RegisterPageInput{
+  width: 12vw;
+  min-width: 200px;
+  height: 4vh;
+  min-height: 30px;
+  padding: 3px;
+  margin-bottom: 1vh;
+}
+
+.RememberCheck {
+  border: 2px solid #bbb;
+  border-radius: 3px;
+  outline: none;
+  transition: background-color 0.5s, border-color 0.5s;
+  cursor: pointer;
+}
+
+.RegisterButton {
+    display: inline-block;
+    margin-bottom: 2vh;
+    padding: 1% 2%;
+    font-size: 16px;
+    background-color: rgb(127, 7, 7);
+    color: #fff;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  }
+  
+  .RegisterButton:hover {
+    background-color:  rgb(184, 2, 2);
+    transition: all 0.7s ease-in-out;
+  }
+  
+  .RegisterButton:focus {
+    outline: none;
+  }
+  
+  .RegisterButton:active {
+    transform: scale(0.95);
+  }
+
+  .RegisterPageLink{
+    color: #d08e00;
+  }

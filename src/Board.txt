@@ -1,0 +1,16 @@
+To Do:
+
+Cassette Page
+- Create Cassette Page
+
+Fix outdated modules
+
+GET DATABASE FOR USERS WORKING
+- get account creation and login working
+
+--------------------------------------------------------------------------------
+
+Cassette Side:
+Size -> the size is set to 100% by 100% so each cassette side will need to be 
+placed inside a div that is set to the wanted size, this allows us to have good 
+control of the size while still keeping the ratio and not passing to many props  

@@ -1,0 +1,91 @@
+@import url('../../App.css');
+
+.LoginBackground{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.LoginBox{
+    width: 20vw;
+    min-width: 400px;
+    height: 50vh;
+    min-height: 390px;
+
+    padding-top: 3vh;
+    margin-top: 20vh;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary-color);
+}
+
+.LoginPageTitle{
+  font-size: 380%;
+  padding-bottom: 3.5vh;
+}
+
+.LoginBoxContent{
+    width: 100%;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LoginPageInputTitle{
+  align-items: left;
+  margin-bottom: 0.5vh;
+}
+
+.LoginPageInput{
+  width: 12vw;
+  min-width: 200px;
+  height: 4vh;
+  min-height: 30px;
+  padding: 3px;
+  margin-bottom: 1vh;
+}
+
+.RememberCheck {
+  border: 2px solid #bbb;
+  border-radius: 3px;
+  outline: none;
+  transition: background-color 0.5s, border-color 0.5s;
+  cursor: pointer;
+}
+
+.LoginButton {
+    display: inline-block;
+    margin-bottom: 2vh;
+    padding: 1% 2%;
+    font-size: 16px;
+    background-color: rgb(127, 7, 7);
+    color: #fff;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  }
+  
+  .LoginButton:hover {
+    background-color:  rgb(184, 2, 2);
+    transition: all 0.7s ease-in-out;
+  }
+  
+  .LoginButton:focus {
+    outline: none;
+  }
+  
+  .LoginButton:active {
+    transform: scale(0.95);
+  }
+
+  .LoginPageLink{
+    color: #d08e00;
+  }

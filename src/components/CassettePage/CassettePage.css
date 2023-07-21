@@ -1,0 +1,60 @@
+@import url('../../App.css');
+
+.Background{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    background-color: var(--primary-color);
+}
+
+.CassettePageContainer{
+    width: 95vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid rgb(25, 24, 24);
+}
+
+.TopBox{
+    width: 100%;
+    height: 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: dashed red;
+}
+
+.EjectButton{
+    height: 100%;
+    width: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 5px rgb(117, 68, 9);
+    background-color: rgb(202, 114, 6);
+}
+
+.EjectTriangle {
+    
+}
+
+.MidBox{
+    width: 100%;
+    height: 72%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: dashed blue;
+}
+
+.BottomBox{
+    width: 100%;
+    height: 16%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: dashed green;
+}

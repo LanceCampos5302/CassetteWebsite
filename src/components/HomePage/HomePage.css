@@ -1,0 +1,47 @@
+@import url('../../App.css');
+
+.Background{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    background-color: var(--primary-color);
+}
+
+.HomePageShelf{
+    width: 14vw;
+    height: 95vh;
+    min-height: 1rem;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid rgb(25, 24, 24);
+}
+
+.HomePageShelf--first{
+    margin-left: 1vw;
+}
+
+.ShelfCassetteSideContainer{
+    width: 100%;
+    height: 8%;
+    max-height: 6vh;
+    min-width: 1rem;
+    min-height: 1rem;
+    margin-top: 0.3vh;
+}
+
+.ShelfCassetteFrontContainer{
+    width: 100%;
+    height: 30%;
+    max-height: 16vh;
+    margin-top: 0.3vh;
+}
+
+.ShelfCassetteCollectionContainer{
+    width: 100%;
+    height: 27%;
+    max-height: 25vh;
+}
