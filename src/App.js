@@ -6,8 +6,6 @@ import HomePage from './components/HomePage/HomePage.js';
 import CassettePage from './components/CassettePage/CassettePage';
 
 
-
-
 function App() {
   return (
       <Router>
