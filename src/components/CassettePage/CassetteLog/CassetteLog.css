@@ -34,22 +34,22 @@
 }
 
 .CassetteLogTitle{
-    width: 25%;
-    height: 100%;
-}
-
-.CassetteLogDateCreated{
     width: 30%;
     height: 100%;
 }
 
+.CassetteLogDateCreated{
+    width: 40%;
+    height: 100%;
+}
+
 .CassetteLogTotalLength{
-    width: 20%;
+    width: 10%;
     height: 100%;
 }
 
 .CassetteLogPlayButton{
-    width: 15%;
+    width: 10%;
     display: flex;
     align-items: center;
     justify-content: center;

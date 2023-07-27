@@ -20,24 +20,28 @@
     height: 12%;
     display: flex;
     flex-direction: column;
-    align-items: left;
     border: dashed red;
 }
 
 .EjectButton{
     height: 100%;
-    width: 8%;
+    width: 7%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 5px rgb(117, 68, 9);
+    justify-content: center;
+    cursor: pointer;
+    border: solid 4px rgb(121, 68, 3);
     background-color: rgb(202, 114, 6);
 }
 
-.EjectTriangle {
-    width: 50%;
-    height: 50%;
-    background-color: brown;
+.EjectIcon {
+    width: 80px;
+    height: 80px;
+    background-image: url('../../assets/EjectIcon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .MidBox{

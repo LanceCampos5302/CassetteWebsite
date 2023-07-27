@@ -11,7 +11,7 @@ const CassetteLog = ({mainText, dateCreated,totalTime}) => {
             <div className='CassetteLogDateCreated CassetteLogTextCenter'>{dateCreated}</div>
             <div className='CassetteLogTotalLength CassetteLogTextCenter'>{totalTime}</div>
             <div className='CassetteLogPlayButton'>
-                <div className='CassetteLogPlayButtonPause'></div>
+                <div className='CassetteLogPlayButtonStart'></div>
             </div>
         </div>
         );

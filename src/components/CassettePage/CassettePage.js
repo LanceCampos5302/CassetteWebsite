@@ -1,5 +1,6 @@
 import './CassettePage.css';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteFront from '../CassetteFront/CassetteFront';
 import CassetteLog from './CassetteLog/CassetteLog';
@@ -8,13 +9,18 @@ const CassettePage = () => {
 
     const [activeButton, setActiveButton] = useState('logs');
 
+    const navigate = useNavigate();
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+    
     return (
         <div className='Background'>
             <SideNavBar/>
             <div className='CassetteHomeContainer'>
                 <div className='TopBox'>
-                    <div className='EjectButton'>
-                        <div className='EjectTriangle'></div>
+                    <div className='EjectButton' onClick={handleGoBack}>
+                        <div className='EjectIcon'></div>
                     </div>
                 </div>
                 <div className='MidBox'>
