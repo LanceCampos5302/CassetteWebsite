@@ -184,7 +184,15 @@
     width: 100%;
     height: 16%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     border: dashed green;
+}
+
+.CassettePageButton {
+    width: 10%;
+    height: 100%;
+    background-color: red;
+    border: solid 3px #131212;
 }

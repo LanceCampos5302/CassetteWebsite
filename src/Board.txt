@@ -11,6 +11,7 @@ GET DATABASE FOR USERS WORKING
 - get account creation and login working
 
 --------------------------------------------------------------------------------
+Notes on How Things Work
 
 Cassette Side:
 Size -> the size is set to 100% by 100% so each cassette side will need to be 
