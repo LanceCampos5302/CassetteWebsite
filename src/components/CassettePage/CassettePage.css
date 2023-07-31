@@ -17,10 +17,10 @@
 
 .TopBox{
     width: 100%;
-    height: 12%;
+    height: 10%;
     display: flex;
     flex-direction: column;
-    border: dashed red;
+    background-color: var(--secondary-color);
 }
 
 .EjectButton{
@@ -36,8 +36,8 @@
 }
 
 .EjectIcon {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 70px;
     background-image: url('../../assets/EjectIcon.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -46,11 +46,10 @@
 
 .MidBox{
     width: 100%;
-    height: 72%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: dashed blue;
 }
 
 .FrontCassetteContainer{
@@ -182,22 +181,37 @@
 
 .BottomBox{
     width: 100%;
-    height: 16%;
+    height: 20%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: dashed green;
+    background-color: var(--secondary-color);
 }
 
 .CassettePageButton {
-    width: 10%;
+    position: relative;
+    width: 7%;
     height: 100%;
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e1d1d;
     border: solid 3px #131212;
 }
 
+.CassettePageButtonTitle{
+    position: absolute;
+    top: 5%;
+    font-size: 1.4rem;
+    color: rgb(240, 232, 232);
+}
+
+
 .CassettePageButtonIndent{
-    width: 20%;
-    height: 20%;
+    width: 50%;
+    height: 45%;
+    border-radius: 50%; 
+    background-color: rgba(0, 0, 0, 0.2);
 }
