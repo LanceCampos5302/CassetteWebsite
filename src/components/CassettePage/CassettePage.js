@@ -65,11 +65,21 @@ const CassettePage = () => {
                     </div>
                 </div>
                 <div className='BottomBox'>
-                    <div className='CassettePageButton'>Back</div>
-                    <div className='CassettePageButton'></div>
-                    <div className='CassettePageButton'>Record</div>
-                    <div className='CassettePageButton'>Start/Pause</div>
-                    <div className='CassettePageButton'>Foward</div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
                 </div>
             </div>
         </div>
