@@ -1,10 +1,15 @@
 To Do:
 
+Functionality:
+- figure out what settings the user will have access too
+- how to record on browser
+- how to download on browser
+
 Cassette Page
 - Improve style
 - add editing to info section
 
-Fix outdated modules
+Fix outdated modules!
 
 GET DATABASE FOR USERS WORKING
 - get account creation and login working
