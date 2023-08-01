@@ -60,19 +60,24 @@ const CassettePage = () => {
                             </div>
                             <div className='CassettePageInfoDateCreated'>Date Created: 7/13/2023 7:05pm</div>
                             <div className='CassettePageInfoErase'>Erase</div>
-                        </> // Closing div tag fixed
+                        </>
                         )}
                     </div>
                 </div>
                 <div className='BottomBox'>
                     <div className='CassettePageButton'>
+                        <div className='CassettePageButtonTitle'>Delete</div>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Back</div>
                         <div className='CassettePageButtonIndent'></div>
                     </div>
                     <div className='CassettePageButton'>
+                        <div className='CassettePageButtonTitle'>Transcribe</div>
                         <div className='CassettePageButtonIndent'></div>
                     </div>
-                    <div className='CassettePageButton'>
+                    <div className='CassettePageButton CassettePageRecordButton'>
                         <div className='CassettePageButtonTitle'>Record</div>
                         <div className='CassettePageButtonIndent'></div>
                     </div>
@@ -82,6 +87,10 @@ const CassettePage = () => {
                     </div>
                     <div className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Foward</div>
+                        <div className='CassettePageButtonIndent'></div>
+                    </div>
+                    <div className='CassettePageButton'>
+                        <div className='CassettePageButtonTitle'>Edit</div>
                         <div className='CassettePageButtonIndent'></div>
                     </div>
                 </div>

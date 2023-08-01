@@ -2,7 +2,6 @@ To Do:
 
 Cassette Page
 - Improve style
-- Add buttons for recording, pause/play, delete, foward, back
 - add editing to info section
 
 Fix outdated modules

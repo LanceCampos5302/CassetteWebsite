@@ -17,34 +17,18 @@
     justify-content: center;
 }
 
-.CassetteLogDelete{
-    width: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.CassetteLogDeleteButton{
-    width: 40px;
-    height: 40px;
-    background-image: url('../../../assets/delete-826.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
 .CassetteLogTitle{
-    width: 30%;
+    width: 35%;
     height: 100%;
 }
 
 .CassetteLogDateCreated{
-    width: 40%;
+    width: 35%;
     height: 100%;
 }
 
 .CassetteLogTotalLength{
-    width: 10%;
+    width: 20%;
     height: 100%;
 }
 
