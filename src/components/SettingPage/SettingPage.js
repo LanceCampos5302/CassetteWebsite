@@ -33,6 +33,7 @@ const SettingPage = () => {
                         Account
                     </div>
                 </div>
+                <div className='SettingPageSelectionBuffer'></div>
                 <div className='SettingPageContent'>
                     {activeButton === 'app' && (
                         <>
@@ -48,12 +49,23 @@ const SettingPage = () => {
                     )}
                     {activeButton === 'account' && (
                         <>
-                            
-                            <div>Profile Picture</div>
-                            <div>User Info</div>
-                            <div>Logout</div>
-                            <div>Delete Account</div>
-                            {/* Add more content related to Account */}
+                            <div className='SettingsProfilePicture'>
+                                <div className='SettingsProfilePictureImage'></div>
+                            </div>
+                            <div className='SettingsAccountContent'>
+                                <div>Username: Sun-Ken Mob</div>
+                            </div>
+                            <div className='SettingsAccountContent'>
+                                    <div className='SettingsAccountStatsSpacing'>Date Created: 08/02/2023</div>
+                                    <div className='SettingsAccountStatsSpacing'>Number of Cassettes: 21</div>
+                                    <div className='SettingsAccountStatsSpacing'>Number of Collections: 4</div>
+                            </div>
+                            <div className='SettingsAccountContent'>
+                                <div className='SettingsAccountButton SettingsAccountButtonLogout'>Logout</div>
+                            </div>
+                            <div className='SettingsAccountContent'>
+                                <div className='SettingsAccountButton SettingsAccountButtonDelete'>Delete Account</div>
+                            </div>
                         </>
                     )}
                 </div>
