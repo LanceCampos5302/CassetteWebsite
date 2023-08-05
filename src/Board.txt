@@ -8,6 +8,7 @@ Functionality:
 Cassette Page
 - Improve style
 - add editing to info section
+- add export button
 
 Fix outdated modules!
 
