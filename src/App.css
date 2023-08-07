@@ -10,6 +10,7 @@
   --secondary-color: #232222;
   --main-font: Bebas Neue;
   --cassette-background: #121211;
+  --error-color: rgb(222, 13, 13);
 }
 
 img, video, svg {

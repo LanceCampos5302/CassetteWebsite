@@ -1,15 +1,39 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [usernameAvailable, setUsernameAvailable] = useState(true);
+
+  const usersCollection = firebase.firestore().collection('users');
+
+  const handleUsernameChange = (newUsername) => {
+    setUsername(newUsername);
+
+    usersCollection
+      .where('username', '==', newUsername)
+      .get()
+      .then((querySnapshot) => {
+        setUsernameAvailable(querySnapshot.empty);
+      })
+      .catch((error) => {
+        console.error('Error checking username availability:', error);
+      });
+  };
 
   const handleRegister = () => {
+    if (!usernameAvailable) {
+      alert('Please choose a different username. The chosen username is already taken.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
@@ -19,19 +43,32 @@ const RegisterPage = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        // Registration successful
-        const user = userCredential.user;
-        console.log('Registration successful!', user);
+        const userUid = userCredential.user.uid;
+
+        // Store User Data in Firestore
+        usersCollection
+          .doc(userUid)
+          .set({
+            username: username,
+            email: email,
+            DateCreated: firebase.firestore.FieldValue.serverTimestamp(),
+            // Other user data fields as needed
+          })
+          .then(() => {
+            navigate('/Login');
+          })
+          .catch((error) => {
+            console.error('Error storing user data:', error);
+          });
       })
       .catch((error) => {
-        // Handle registration errors
         console.error('Registration error:', error.message);
       });
   };
 
   return (
     <div className='RegisterBackground'>
-      <div className='RegisterBox'>
+      <div className={`RegisterBox ${!usernameAvailable ? 'RegisterBoxIncrease' : ''}`}>
         <div className='RegisterPageTitle'>Register</div>
         <div className='RegisterBoxContent'>
           <div className='RegisterPageInputs'>
@@ -40,9 +77,12 @@ const RegisterPage = () => {
               className='RegisterPageInput'
               type='text'
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => handleUsernameChange(e.target.value)}
               placeholder='Username'
             />
+            {!usernameAvailable && (
+              <p className='InputErrorMessage'>Username is Unavailable</p>
+            )}
             <div className='RegisterPageInputTitle'>Email Address</div>
             <input
               className='RegisterPageInput'
@@ -61,7 +101,6 @@ const RegisterPage = () => {
             />
             <div className='RegisterPageInputTitle'>Confirm Password</div>
             <input
-              style={{ marginBottom: '2vh' }}
               className='RegisterPageInput'
               type='password'
               value={confirmPassword}
@@ -72,6 +111,7 @@ const RegisterPage = () => {
           <button
             className='RegisterButton RegisterPageInput'
             onClick={handleRegister}
+            disabled={!usernameAvailable}
           >
             Create Account
           </button>

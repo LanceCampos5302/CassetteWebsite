@@ -24,6 +24,10 @@
     background-color: var(--secondary-color);
 }
 
+.RegisterBoxIncrease{
+  height: 65vh !important;
+}
+
 .RegisterPageTitle{
   font-size: 380%;
   padding-bottom: 3.5vh;
@@ -49,6 +53,11 @@
   min-height: 30px;
   padding: 3px;
   margin-bottom: 1vh;
+}
+
+.InputErrorMessage{
+  padding-bottom: 2%;
+  color: var(--error-color);
 }
 
 .RememberCheck {
