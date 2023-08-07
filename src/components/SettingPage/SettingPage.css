@@ -30,7 +30,7 @@
 
 .SettingPageSelectionBuffer{
     width: 60vw;
-    height: 12%;
+    height: 15%;
     min-height: 10%;
     max-height: 500px;
 }
@@ -48,8 +48,7 @@
 }
 
 .SettingPageSelectedButton{
-    background-color: var(--secondary-color);
-    background-color: hsla(0, 0%, 0%, 0.4);
+    background-color: var(--primary-color);
 }
 
 .SettingPageUnSelectedButton{
@@ -57,7 +56,7 @@
 }
 
 .SettingPageUnSelectedButton:hover{
-    background-color: hsla(0, 0%, 0%, 0.4);
+    background-color: var(--primary-color);
     transition: background-color 0.5s ease-in-out;
 }
 
@@ -66,13 +65,36 @@
     color: white;
 }
 
+/* ------- App Settings Content ------- */
 
 
 
 
 
+/* ------- Privacy Content ------- */
 
+.SettingsPrivacyTitle{
+    font-size: 2rem;
+    padding-bottom: 3%;
+}
 
+.SettingsPrivacyStatement{
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.SettingsPrivacyStatement p {
+    padding: 1%;
+    font-size: 1rem;
+}
+
+.SettingsPrivacySignOff{
+    padding-right: 5%;
+    padding-top: 4%;
+    float: right;
+}
+
+/* ------- Profile Content ------- */
 
 .SettingsProfilePicture{
     width: 100%;

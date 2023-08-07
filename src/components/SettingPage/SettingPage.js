@@ -37,14 +37,37 @@ const SettingPage = () => {
                 <div className='SettingPageContent'>
                     {activeButton === 'app' && (
                         <>
-                            <div>App Settings Content</div>
-                            {/* Add more content related to App Settings */}
+                            <div>App Settings Coming Soon</div>
                         </>
                     )}
                     {activeButton === 'privacy' && (
                         <>
-                            <div>Privacy Content</div>
-                            {/* Add more content related to Privacy */}
+                            <div className='SettingsPrivacyTitle'>Privacy Statement</div>
+                            <div className='SettingsPrivacyStatement'>
+                                <p>
+                                    We prioritize your privacy. Your personal recordings are kept secure and confidential. We never share or
+                                    sell your data. Our aim is to allow you to use our service confidently without having to worry about your
+                                    information being stolen or sold.
+                                </p>
+                                <p>
+                                    We may collect certain information when you use our app, such as your name, email address, and device
+                                    information. Additionally, our app may access your device's microphone to record audio files as per your
+                                    explicit permission.
+                                </p>
+                                <p>
+                                    We never share your personal information with third parties for marketing purposes. However, we may share
+                                    anonymous and aggregated usage statistics to improve our app's performance and features.
+                                </p>
+                                <p>
+                                    We may use cookies and similar technologies to enhance your app experience. These technologies do not collect
+                                    personally identifiable information.
+                                </p>
+                                <p>
+                                    We reserve the right to update this Privacy Policy periodically. Any changes will be posted on this page, and
+                                    your continued use of our app after such modifications will constitute your acceptance of the updated terms.
+                                </p>
+                                <p className='SettingsPrivacySignOff'> - The Cassette Team</p>
+                            </div>
                         </>
                     )}
                     {activeButton === 'account' && (
