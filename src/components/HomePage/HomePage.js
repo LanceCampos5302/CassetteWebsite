@@ -3,7 +3,6 @@ import './HomePage.css';
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteSide from '../CassetteSide/CassetteSide.js';
 import CassetteFront from '../CassetteFront/CassetteFront.js';
-import CollectionView from '../CollectionView/CollectionView';
 
 const HomePage = () => {
 
@@ -51,13 +50,6 @@ const HomePage = () => {
             <div className='HomePageShelf'>
                 <div className='ShelfCassetteFrontContainer'>
                     <CassetteFront mainText='Ahhhhh' subText='7/13/2023' backgroundColor=' var(--cassette-background)' highlightColor='#08999a'/>
-                </div>
-            </div>
-
-
-            <div className='HomePageShelf'>
-                <div className='ShelfCassetteCollectionContainer'>
-                    <CollectionView mainText='Brazillian JiuJitsu Logs' backgroundColor='#666464' highlightColor = '#6a0aa6'/>      
                 </div>
             </div>
         </div>

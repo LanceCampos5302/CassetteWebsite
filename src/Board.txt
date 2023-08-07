@@ -1,14 +1,11 @@
 To Do:
 
+Changes to project:
+- Collections will be scrapped as of now
+
 Functionality:
-- figure out what settings the user will have access too
 - how to record on browser
 - how to download on browser
-
-Cassette Page
-- Improve style
-- add editing to info section
-- add export button
 
 Fix outdated modules!
 

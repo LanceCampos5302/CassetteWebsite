@@ -90,7 +90,7 @@ const CassettePage = () => {
                         <div className='CassettePageButtonIndent'></div>
                     </div>
                     <div className='CassettePageButton'>
-                        <div className='CassettePageButtonTitle'>Edit</div>
+                        <div className='CassettePageButtonTitle'>Export</div>
                         <div className='CassettePageButtonIndent'></div>
                     </div>
                 </div>

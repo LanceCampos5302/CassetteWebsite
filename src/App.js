@@ -15,7 +15,7 @@ function App() {
           <Route path="/Register" element={<RegisterPage/>}/>
           <Route exact path="/Home" element={<HomePage/>}/>
           <Route exact path="/CassettePage" element={<CassettePage/>}/>
-          <Route exact path="/" element={<SettingPage/>}/>
+          <Route exact path="/Settings" element={<SettingPage/>}/>
         </Routes>
       </Router>
   );

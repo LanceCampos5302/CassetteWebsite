@@ -25,10 +25,12 @@ const SideNavBar = () => {
                         <CassetteSide mainText="Record" backgroundColor=' var(--cassette-background)' highlightColor='#9c1602'/>
                     </div>
                     <div className='CassetteContainer NavBarCassetteGroup1'>
-                        <CassetteSide mainText="Collections" backgroundColor=' var(--cassette-background)' highlightColor='#61029c'/>
+                        <CassetteSide mainText="Export" backgroundColor=' var(--cassette-background)' highlightColor='#61029c'/>
                     </div>
                     <div className='CassetteContainer NavBarCassetteGroup1'>
-                        <CassetteSide mainText="Settings" backgroundColor=' var(--cassette-background)' highlightColor='#286313'/>
+                        <a className='no-style-link' href='/Settings'>
+                            <CassetteSide mainText="Settings" backgroundColor=' var(--cassette-background)' highlightColor='#286313'/>
+                        </a>
                     </div>
                     <div className='CassetteContainer'>
                         <CassetteSide mainText="Account" backgroundColor=' var(--cassette-background)' highlightColor='#060d70'/>
