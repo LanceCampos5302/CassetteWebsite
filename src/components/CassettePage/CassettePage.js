@@ -1,10 +1,8 @@
 import './CassettePage.css';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
-
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteFront from '../CassetteFront/CassetteFront';
 import CassetteLog from './CassetteLog/CassetteLog';
@@ -12,63 +10,43 @@ import CassetteLog from './CassetteLog/CassetteLog';
 
 const CassettePage = () => {
 
-    const [activeButton, setActiveButton] = useState('logs');
-    const [recording, setRecording] = useState(false);
-    const [audioChunks, setAudioChunks] = useState([]);
-    const mediaRecorderRef = useRef(null);
-    const [audioBlob, setAudioBlob] = useState(null);
+  const [activeButton, setActiveButton] = useState('logs');
+  const [recording] = false;
   
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+      navigate(-1);
+  };
 
-    const navigate = useNavigate();
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-  
-    const startRecording = () => {
-      navigator.mediaDevices.getUserMedia({ audio: true })
-        .then((stream) => {
-          const mediaRecorder = new MediaRecorder(stream);
-          mediaRecorder.ondataavailable = (event) => {
-            if (event.data.size > 0) {
-              setAudioChunks((prevChunks) => [...prevChunks, event.data]);
-            }
-          };
-          mediaRecorder.onstop = () => {
-            const newAudioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-            setAudioChunks([]);
-            setRecording(false);
-            setAudioBlob(newAudioBlob); // Set the audioBlob in the component state
-          };
-          mediaRecorderRef.current = mediaRecorder;
-          setRecording(true);
-          mediaRecorder.start();
-        })
-        .catch((error) => {
-          console.error('Error accessing microphone:', error);
-        });
-    };
-  
-    const stopRecording = () => {
-      if (mediaRecorderRef.current) {
-        uploadAudio();
-        mediaRecorderRef.current.stop();
-      }
-    };
+  const startRecording = () => {''
+    alert("start recording")
+  };
 
-    const uploadAudio = () => {
-        if (audioBlob) {
-          const storageRef = firebase.storage().ref();
-          const audioRef = storageRef.child('audio/' + Date.now() + '.wav');
-          
-          audioRef.put(audioBlob).then((snapshot) => {
-            console.log('Audio uploaded!', snapshot);
-          }).catch((error) => {
-            console.error('Error uploading audio:', error);
+  const stopRecording = () => {
+    if (true) {
+      alert("stop recording")
+    }
+  };
+
+  const uploadAudio = async (audioBlob) => {
+    if (audioBlob) {
+      try {
+        // Create a Firestore document with user ID and audio URL
+        const user = firebase.auth().currentUser; // Assuming user is authenticated
+        if (user) {
+          const audioDocRef = firebase.firestore().collection('audio').doc();
+          await audioDocRef.set({
+            userId: user.uid,
+            audioUrl: "test",
+            DateCreated: firebase.firestore.FieldValue.serverTimestamp()
           });
-        } else {
-          console.error('No audio to upload');
+          console.log('Audio metadata stored in Firestore');
         }
-      };
+      } catch (error) {
+        console.error('Error uploading audio or storing metadata:', error);
+      }
+    }
+  };
 
     
     return (
