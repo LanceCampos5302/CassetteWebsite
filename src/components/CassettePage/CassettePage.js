@@ -1,18 +1,75 @@
 import './CassettePage.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
+
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteFront from '../CassetteFront/CassetteFront';
 import CassetteLog from './CassetteLog/CassetteLog';
 
+
 const CassettePage = () => {
 
     const [activeButton, setActiveButton] = useState('logs');
+    const [recording, setRecording] = useState(false);
+    const [audioChunks, setAudioChunks] = useState([]);
+    const mediaRecorderRef = useRef(null);
+    const [audioBlob, setAudioBlob] = useState(null);
+  
 
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
     };
+  
+    const startRecording = () => {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          const mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+              setAudioChunks((prevChunks) => [...prevChunks, event.data]);
+            }
+          };
+          mediaRecorder.onstop = () => {
+            const newAudioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            setAudioChunks([]);
+            setRecording(false);
+            setAudioBlob(newAudioBlob); // Set the audioBlob in the component state
+          };
+          mediaRecorderRef.current = mediaRecorder;
+          setRecording(true);
+          mediaRecorder.start();
+        })
+        .catch((error) => {
+          console.error('Error accessing microphone:', error);
+        });
+    };
+  
+    const stopRecording = () => {
+      if (mediaRecorderRef.current) {
+        uploadAudio();
+        mediaRecorderRef.current.stop();
+      }
+    };
+
+    const uploadAudio = () => {
+        if (audioBlob) {
+          const storageRef = firebase.storage().ref();
+          const audioRef = storageRef.child('audio/' + Date.now() + '.wav');
+          
+          audioRef.put(audioBlob).then((snapshot) => {
+            console.log('Audio uploaded!', snapshot);
+          }).catch((error) => {
+            console.error('Error uploading audio:', error);
+          });
+        } else {
+          console.error('No audio to upload');
+        }
+      };
+
     
     return (
         <div className='Background'>
@@ -39,16 +96,6 @@ const CassettePage = () => {
                             <CassetteLog mainText='Yellowish_02' dateCreated='05/04/2002 11:51am' totalTime='27:01'/>
                             <CassetteLog mainText='Yellowish_03' dateCreated='05/05/2002 7:12pm' totalTime='1:51'/>
                             <CassetteLog mainText='Yellowish_04' dateCreated='05/06/2002 9:15am' totalTime='15:32'/>
-                            <CassetteLog mainText='Yellowish_05' dateCreated='05/07/2002 2:21pm' totalTime='7:01'/>
-                            <CassetteLog mainText='Yellowish_06' dateCreated='05/08/2002 6:22pm' totalTime='1:51'/>
-                            <CassetteLog mainText='Yellowish_03' dateCreated='05/05/2002 7:12pm' totalTime='1:51'/>
-                            <CassetteLog mainText='Yellowish_04' dateCreated='05/06/2002 9:15am' totalTime='15:32'/>
-                            <CassetteLog mainText='Yellowish_05' dateCreated='05/07/2002 2:21pm' totalTime='7:01'/>
-                            <CassetteLog mainText='Yellowish_06' dateCreated='05/08/2002 6:22pm' totalTime='1:51'/>
-                            <CassetteLog mainText='Yellowish_03' dateCreated='05/05/2002 7:12pm' totalTime='1:51'/>
-                            <CassetteLog mainText='Yellowish_04' dateCreated='05/06/2002 9:15am' totalTime='15:32'/>
-                            <CassetteLog mainText='Yellowish_05' dateCreated='05/07/2002 2:21pm' totalTime='7:01'/>
-                            <CassetteLog mainText='Yellowish_06' dateCreated='05/08/2002 6:22pm' totalTime='1:51'/>
                         </>
                         ) : (
                         <>
@@ -65,34 +112,34 @@ const CassettePage = () => {
                     </div>
                 </div>
                 <div className='BottomBox'>
-                    <div className='CassettePageButton'>
+                    <button className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Delete</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton'>
+                    </button>
+                    <button className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Back</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton'>
+                    </button>
+                    <button className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Transcribe</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton CassettePageRecordButton'>
+                    </button>
+                    <button onClick={startRecording} disabled={recording} className='CassettePageButton CassettePageRecordButton'>
                         <div className='CassettePageButtonTitle'>Record</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton'>
-                        <div className='CassettePageButtonTitle'>Play</div>
+                    </button>
+                    <button onClick={stopRecording} disabled={!recording} className='CassettePageButton'>
+                        <div className='CassettePageButtonTitle'>Stop</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton'>
+                    </button>
+                    <button className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Foward</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
-                    <div className='CassettePageButton'>
+                    </button>
+                    <button className='CassettePageButton'>
                         <div className='CassettePageButtonTitle'>Export</div>
                         <div className='CassettePageButtonIndent'></div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
