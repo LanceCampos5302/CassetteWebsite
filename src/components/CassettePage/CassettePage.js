@@ -11,29 +11,35 @@ import CassetteLog from './CassetteLog/CassetteLog';
 const CassettePage = () => {
 
   const [activeButton, setActiveButton] = useState('logs');
-  const [recording] = false;
+  const [recording, setRecording] = useState(false);
   
   const navigate = useNavigate();
   const handleGoBack = () => {
       navigate(-1);
   };
 
-  const startRecording = () => {''
-    alert("start recording")
+  const startRecording = () => {
+    if(!recording){
+      setRecording(!recording);
+      alert("start recording");
+    }
   };
 
   const stopRecording = () => {
-    if (true) {
-      alert("stop recording")
+    if (recording) {
+      uploadAudio();
+      setRecording(!recording)
+      alert("stop recording");
     }
   };
 
   const uploadAudio = async (audioBlob) => {
-    if (audioBlob) {
+    if (true) {
       try {
         // Create a Firestore document with user ID and audio URL
         const user = firebase.auth().currentUser; // Assuming user is authenticated
-        if (user) {
+        console.log(user);
+        if (true) {
           const audioDocRef = firebase.firestore().collection('audio').doc();
           await audioDocRef.set({
             userId: user.uid,

@@ -52,7 +52,6 @@ const RegisterPage = () => {
             username: username,
             email: email,
             DateCreated: firebase.firestore.FieldValue.serverTimestamp(),
-            // Other user data fields as needed
           })
           .then(() => {
             navigate('/Login');
