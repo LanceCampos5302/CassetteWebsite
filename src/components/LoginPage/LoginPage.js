@@ -21,7 +21,6 @@ const LoginPage = () => {
       .catch((error) => {
         // Handle login errors
         console.error('Login error:', error.message);
-        // You can show an error message to the user here if needed
       });
   };
 

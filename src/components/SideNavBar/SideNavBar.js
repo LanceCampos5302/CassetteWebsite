@@ -22,7 +22,9 @@ const SideNavBar = () => {
                         
                     </div>
                     <div className='CassetteContainer NavBarCassetteGroup1'>
-                        <CassetteSide mainText="Record" backgroundColor=' var(--cassette-background)' highlightColor='#9c1602'/>
+                        <a className='no-style-link' href='/CassettePage'>
+                            <CassetteSide mainText="Record" backgroundColor=' var(--cassette-background)' highlightColor='#9c1602'/>
+                        </a>
                     </div>
                     <div className='CassetteContainer NavBarCassetteGroup1'>
                         <CassetteSide mainText="Export" backgroundColor=' var(--cassette-background)' highlightColor='#61029c'/>

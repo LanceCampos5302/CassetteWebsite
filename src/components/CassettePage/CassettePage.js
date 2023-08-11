@@ -1,5 +1,5 @@
 import './CassettePage.css';
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
@@ -18,6 +18,33 @@ const CassettePage = () => {
       navigate(-1);
   };
 
+  const [cassetteLogs, setCassetteLogs] = useState([]);
+
+  useEffect(() => {
+    console.log("running");
+    
+    const storedCassetteLogs = JSON.parse(localStorage.getItem('cassetteLogs')) || [];
+    setCassetteLogs(storedCassetteLogs);
+    const user = firebase.auth().currentUser;
+    console.log(user);
+
+    const unsubscribe = firebase.firestore().collection('audio')
+    .where('userId', '==', user.uid) // Replace with actual user ID
+    .onSnapshot(snapshot => {
+    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(data); // Log the fetched data
+    setCassetteLogs(data);
+
+    // Store data in local storage
+    localStorage.setItem('cassetteLogs', JSON.stringify(data));
+  });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
+
   const startRecording = () => {
     if(!recording){
       setRecording(!recording);
@@ -29,6 +56,9 @@ const CassettePage = () => {
     if (recording) {
       uploadAudio();
       setRecording(!recording)
+      cassetteLogs.map(cassetteData => (
+        <CassetteLog mainText='Yellowish' key={cassetteData.id} audioData={cassetteData} />
+      ))
       alert("stop recording");
     }
   };
@@ -43,7 +73,7 @@ const CassettePage = () => {
           const audioDocRef = firebase.firestore().collection('audio').doc();
           await audioDocRef.set({
             userId: user.uid,
-            audioUrl: "test",
+            audioUrl: "Audio.mp4",
             DateCreated: firebase.firestore.FieldValue.serverTimestamp()
           });
           console.log('Audio metadata stored in Firestore');
@@ -76,10 +106,9 @@ const CassettePage = () => {
                         {/* Conditionally render the content based on the activeButton */}
                         {activeButton === 'logs' ? (
                         <>
-                            <CassetteLog mainText='Yellowish_01' dateCreated='05/03/2002 3:15am' totalTime='5:32'/>
-                            <CassetteLog mainText='Yellowish_02' dateCreated='05/04/2002 11:51am' totalTime='27:01'/>
-                            <CassetteLog mainText='Yellowish_03' dateCreated='05/05/2002 7:12pm' totalTime='1:51'/>
-                            <CassetteLog mainText='Yellowish_04' dateCreated='05/06/2002 9:15am' totalTime='15:32'/>
+                          {cassetteLogs.map(cassetteData => (
+                            <CassetteLog mainText='Yellowish' key={cassetteData.id} audioData={cassetteData} />
+                          ))}
                         </>
                         ) : (
                         <>
