@@ -26,22 +26,28 @@ const CassettePage = () => {
     const storedCassetteLogs = JSON.parse(localStorage.getItem('cassetteLogs')) || [];
     setCassetteLogs(storedCassetteLogs);
     const user = firebase.auth().currentUser;
-    console.log(user);
+    try{
+      console.log(user);
 
-    const unsubscribe = firebase.firestore().collection('audio')
-    .where('userId', '==', user.uid) // Replace with actual user ID
-    .onSnapshot(snapshot => {
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data); // Log the fetched data
-    setCassetteLogs(data);
+      const unsubscribe = firebase.firestore().collection('audio')
+      .where('userId', '==', 'yE32S68jyTcQhtooJowBcbQtL6f1') // Replace with actual user ID
+      .onSnapshot(snapshot => {
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      console.log(data); // Log the fetched data
+      setCassetteLogs(data);
 
-    // Store data in local storage
-    localStorage.setItem('cassetteLogs', JSON.stringify(data));
-  });
+      // Store data in local storage
+      localStorage.setItem('cassetteLogs', JSON.stringify(data));
+      return () => {
+        unsubscribe();
+      };
+    });
+    }
+    catch(error){
+      console.error("Error getting user data:", error);
+      throw error;
+    }
 
-    return () => {
-      unsubscribe();
-    };
   }, []);
   
 
