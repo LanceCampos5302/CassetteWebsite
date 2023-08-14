@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
 import './HomePage.css';
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteSide from '../CassetteSide/CassetteSide.js';
@@ -7,10 +9,47 @@ import CassetteFront from '../CassetteFront/CassetteFront.js';
 const HomePage = () => {
 
     const [SideView, setSideView] = useState(true);
+    const [Cassettes, setCassettes] = useState([]);
 
     const clickSideView = () => {
         setSideView((prevValue) => !prevValue);
     };
+
+    useEffect(() => {
+        const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            
+            const storedCassettes = JSON.parse(localStorage.getItem('Cassettes')) || [];
+            setCassettes(storedCassettes);
+      
+            try {
+                const unsubscribe = firebase.firestore().collection('user').doc(user.uid).collection('Cassettes')
+                .where('Type', '==', 'Cassette')
+                .onSnapshot(snapshot => {
+                  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                  console.log("before set");
+                  console.log(data);
+                  setCassettes(data);
+                  console.log(firebase.firestore().collection('user').doc(user.uid).collection('Cassettes'));
+              
+                  // Store data in local storage
+                  localStorage.setItem('Cassettes', JSON.stringify(data));
+                });              
+
+              return () => {
+                unsubscribe();
+              };
+            } catch (error) {
+              console.error("Error getting user data:", error);
+              throw error;
+            }
+          }
+        });
+      
+        return () => {
+          unsubscribe();
+        };
+      }, []);  
 
     return (
         <div className='Background'>
@@ -35,15 +74,15 @@ const HomePage = () => {
                 </div>
             </div>
 
-
             <div className='HomePageShelf'>
-                <div className='ShelfCassetteSideContainer'>
-                    <CassetteSide mainText="Trials of the common man and his day" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
-                </div>
+                <>
+                    {Cassettes.map(cassettesData => (
+                        <div className='ShelfCassetteSideContainer'>
+                            <CassetteSide key={cassettesData.id} audioData={cassettesData} mainText="Trials of the common man and his day" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
+                        </div>
+                    ))}
+                </>
 
-                <div className='ShelfCassetteSideContainer'>
-                    <CassetteSide mainText="Yestes" backgroundColor=' var(--cassette-background)' highlightColor='#08888a'/>
-                </div>
             </div>
 
 

@@ -12,44 +12,51 @@ const CassettePage = () => {
 
   const [activeButton, setActiveButton] = useState('logs');
   const [recording, setRecording] = useState(false);
+  const [cassetteLogs, setCassetteLogs] = useState([]);
   
   const navigate = useNavigate();
   const handleGoBack = () => {
       navigate(-1);
   };
 
-  const [cassetteLogs, setCassetteLogs] = useState([]);
 
   useEffect(() => {
-    console.log("running");
-    
-    const storedCassetteLogs = JSON.parse(localStorage.getItem('cassetteLogs')) || [];
-    setCassetteLogs(storedCassetteLogs);
-    const user = firebase.auth().currentUser;
-    try{
-      console.log(user);
-
-      const unsubscribe = firebase.firestore().collection('audio')
-      .where('userId', '==', 'yE32S68jyTcQhtooJowBcbQtL6f1') // Replace with actual user ID
-      .onSnapshot(snapshot => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      console.log(data); // Log the fetched data
-      setCassetteLogs(data);
-
-      // Store data in local storage
-      localStorage.setItem('cassetteLogs', JSON.stringify(data));
-      return () => {
-        unsubscribe();
-      };
-    });
-    }
-    catch(error){
-      console.error("Error getting user data:", error);
-      throw error;
-    }
-
-  }, []);
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log("UseEffect");
+        
+        const storedCassetteLogs = JSON.parse(localStorage.getItem('cassetteLogs')) || [];
+        setCassetteLogs(storedCassetteLogs);
   
+        console.log("Getting the user");
+        console.log(user);
+  
+        try {
+          const unsubscribe = firebase.firestore().collection('audio')
+            .where('userId', '==', user.uid) // Replace with actual user ID
+            .onSnapshot(snapshot => {
+              const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+              console.log(data); // Log the fetched data
+              setCassetteLogs(data);
+  
+              // Store data in local storage
+              localStorage.setItem('cassetteLogs', JSON.stringify(data));
+            });
+          
+          return () => {
+            unsubscribe();
+          };
+        } catch (error) {
+          console.error("Error getting user data:", error);
+          throw error;
+        }
+      }
+    });
+  
+    return () => {
+      unsubscribe();
+    };
+  }, []);  
 
   const startRecording = () => {
     if(!recording){
@@ -62,9 +69,6 @@ const CassettePage = () => {
     if (recording) {
       uploadAudio();
       setRecording(!recording)
-      cassetteLogs.map(cassetteData => (
-        <CassetteLog mainText='Yellowish' key={cassetteData.id} audioData={cassetteData} />
-      ))
       alert("stop recording");
     }
   };
