@@ -16,44 +16,47 @@ const HomePage = () => {
     };
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-          if (user) {
+      const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          console.log("UseEffect");
+          
+          const storedCassettes = JSON.parse(localStorage.getItem('Cassettes')) || [];
+          setCassettes(storedCassettes);
+    
+          console.log("Getting the user");
+          console.log(user);
+    
+          try {
+            const unsubscribe = firebase.firestore().collection('users').doc(user.uid).collection('Cassettes')
+             // .where('userId', '==', 'userId') // Replace with actual user ID
+              .onSnapshot(snapshot => {
+                const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.log(data); // Log the fetched data
+                setCassettes(data);
+    
+                // Store data in local storage
+                localStorage.setItem('Cassettes', JSON.stringify(data));
+              });
             
-            const storedCassettes = JSON.parse(localStorage.getItem('Cassettes')) || [];
-            setCassettes(storedCassettes);
-      
-            try {
-                const unsubscribe = firebase.firestore().collection('user').doc(user.uid).collection('Cassettes')
-                .where('Type', '==', 'Cassette')
-                .onSnapshot(snapshot => {
-                  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                  console.log("before set");
-                  console.log(data);
-                  setCassettes(data);
-                  console.log(firebase.firestore().collection('user').doc(user.uid).collection('Cassettes'));
-              
-                  // Store data in local storage
-                  localStorage.setItem('Cassettes', JSON.stringify(data));
-                });              
-
-              return () => {
-                unsubscribe();
-              };
-            } catch (error) {
-              console.error("Error getting user data:", error);
-              throw error;
-            }
+            return () => {
+              unsubscribe();
+            };
+          } catch (error) {
+            console.error("Error getting user data:", error);
+            throw error;
           }
-        });
-      
-        return () => {
-          unsubscribe();
-        };
-      }, []);  
+        }
+      });
+    
+      return () => {
+        unsubscribe();
+      };
+    }, []);  
 
     return (
         <div className='Background'>
             <SideNavBar/>
+            {/*
             <div className='HomePageShelf HomePageShelf--first'>
 
                 <div className={SideView ? 'ShelfCassetteSideContainer':'ShelfCassetteFrontContainer'} onClick={clickSideView}>
@@ -73,25 +76,28 @@ const HomePage = () => {
                     <CassetteSide mainText="Days" backgroundColor=' var(--cassette-background)' highlightColor='#909011'/>
                 </div>
             </div>
+            */}
 
             <div className='HomePageShelf'>
                 <>
                     {Cassettes.map(cassettesData => (
                         <div className='ShelfCassetteSideContainer'>
-                            <CassetteSide key={cassettesData.id} audioData={cassettesData} mainText="Trials of the common man and his day" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
+                            <CassetteSide key={cassettesData.id} audioData={cassettesData} mainText="Test Cassette" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
                         </div>
                     ))}
                 </>
 
             </div>
-
-
+          
+        {/*
             <div className='HomePageShelf'>
                 <div className='ShelfCassetteFrontContainer'>
                     <CassetteFront mainText='Ahhhhh' subText='7/13/2023' backgroundColor=' var(--cassette-background)' highlightColor='#08999a'/>
                 </div>
             </div>
+          */}
         </div>
+        
         );
     }
 
