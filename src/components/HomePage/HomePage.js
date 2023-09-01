@@ -4,16 +4,10 @@ import 'firebase/compat/storage';
 import './HomePage.css';
 import SideNavBar from '../SideNavBar/SideNavBar.js';
 import CassetteSide from '../CassetteSide/CassetteSide.js';
-import CassetteFront from '../CassetteFront/CassetteFront.js';
 
 const HomePage = () => {
 
-    const [SideView, setSideView] = useState(true);
     const [Cassettes, setCassettes] = useState([]);
-
-    const clickSideView = () => {
-        setSideView((prevValue) => !prevValue);
-    };
 
     useEffect(() => {
       const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -56,46 +50,43 @@ const HomePage = () => {
     return (
         <div className='Background'>
             <SideNavBar/>
-            {/*
-            <div className='HomePageShelf HomePageShelf--first'>
 
-                <div className={SideView ? 'ShelfCassetteSideContainer':'ShelfCassetteFrontContainer'} onClick={clickSideView}>
-                    {SideView ? <CassetteSide mainText="Fish Logs" backgroundColor=' var(--cassette-background)' highlightColor='#00149a'/> 
-                    : <CassetteFront mainText="Fish Logs" subText='7/13/2023' backgroundColor=' var(--cassette-background)' highlightColor='#00149a'/>} 
-                </div>
+            <div className='HomePageContentContainer'>
 
-                <div className='ShelfCassetteSideContainer'>
-                    <CassetteSide mainText="Affirmate" backgroundColor=' var(--cassette-background)' highlightColor='#088010'/>
-                </div>
+              <div className='HomePageShelf'>
+                  <>
+                      {Cassettes.map(cassettesData => (
+                          <div className='ShelfCassetteSideContainer'>
+                              <CassetteSide key={cassettesData.id} audioData={cassettesData} mainText="Test Cassette" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
+                          </div>
+                      ))}
+                  </>
 
-                <div className='ShelfCassetteFrontContainer'>
-                    <CassetteFront mainText='Yellowish' subText='7/13/2023' backgroundColor=' var(--cassette-background)' highlightColor='#98990a'/>
-                </div>
-
-                <div className='ShelfCassetteSideContainer'>
-                    <CassetteSide mainText="Days" backgroundColor=' var(--cassette-background)' highlightColor='#909011'/>
-                </div>
-            </div>
-            */}
-
-            <div className='HomePageShelf'>
-                <>
-                    {Cassettes.map(cassettesData => (
-                        <div className='ShelfCassetteSideContainer'>
-                            <CassetteSide key={cassettesData.id} audioData={cassettesData} mainText="Test Cassette" backgroundColor=' var(--cassette-background)' highlightColor='#880804'/>
-                        </div>
-                    ))}
-                </>
-
-            </div>
-          
-        {/*
-            <div className='HomePageShelf'>
-                <div className='ShelfCassetteFrontContainer'>
-                    <CassetteFront mainText='Ahhhhh' subText='7/13/2023' backgroundColor=' var(--cassette-background)' highlightColor='#08999a'/>
-                </div>
-            </div>
-          */}
+              </div>
+            
+              <div className='BottomBox'>
+                      <button className='HomePageButton'>
+                          <div className='HomePageButtonTitle'>Delete</div>
+                          <div className='HomePageButtonIndent'></div>
+                      </button>
+                      <button className='HomePageButton'>
+                          <div className='HomePageButtonTitle'>Transcribe</div>
+                          <div className='HomePageButtonIndent'></div>
+                      </button>
+                      <button className='HomePageButton HomePageRecordButton'>
+                          <div className='HomePageButtonTitle'>Create</div>
+                          <div className='HomePageButtonIndent'></div>
+                      </button>
+                      <button className='HomePageButton'>
+                          <div className='HomePageButtonTitle'>Select</div>
+                          <div className='HomePageButtonIndent'></div>
+                      </button>
+                      <button className='HomePageButton'>
+                          <div className='HomePageButtonTitle'>Export</div>
+                          <div className='HomePageButtonIndent'></div>
+                      </button>
+                  </div>
+              </div>
         </div>
         
         );
