@@ -4,7 +4,6 @@ Have home page load user Cassettes
 
 Implement creation of Cassettes
 
-
 Functionality:
 - how to record on browser
 - how to download on browser
@@ -21,4 +20,5 @@ placed inside a div that is set to the wanted size, this allows us to have good
 control of the size while still keeping the ratio and not passing to many props  
 
 Changes to project:
-- Collections will be scrapped as of now
+- Collections will be scrapped as of now 
+Reason: the cassette logs in each cassettte work as a folder
