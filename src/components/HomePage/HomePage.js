@@ -66,7 +66,7 @@ const HomePage = () => {
             
               <div className='BottomBox'>
                       <button className='HomePageButton'>
-                          <div className='HomePageButtonTitle'>Delete</div>
+                          <div className='HomePageButtonTitle'>Select</div>
                           <div className='HomePageButtonIndent'></div>
                       </button>
                       <button className='HomePageButton'>
@@ -78,7 +78,7 @@ const HomePage = () => {
                           <div className='HomePageButtonIndent'></div>
                       </button>
                       <button className='HomePageButton'>
-                          <div className='HomePageButtonTitle'>Select</div>
+                          <div className='HomePageButtonTitle'>Delete</div>
                           <div className='HomePageButtonIndent'></div>
                       </button>
                       <button className='HomePageButton'>
